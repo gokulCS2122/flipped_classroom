@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipped Classroom</title>
+    <link rel="stylesheet" href="styl.css">
+    <style>
+        /* General styles */
+        html, body {
+            height: 100%; /* Full height for body */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        header .container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a.btn {
+            background-color: #007bff;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        nav ul li a.btn:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px 0;
+            flex: 1; /* Allows the section to grow and fill the available space */
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative; /* Relative position to allow adjustments */
+        }
+
+        /* Add CSS for modals */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            animation: fadeIn 0.5s; /* Animation for fade in */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 500px; /* Maximum width */
+            border-radius: 8px; /* Rounded corners */
+            transform: translateY(-50px); /* Initial position for slide effect */
+            animation: slideIn 0.5s ease-out; /* Animation for slide in */
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-content ul li {
+            margin: 10px 0;
+        }
+
+        .modal-content ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .modal-content ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Flipped Classroom</h1>
+            <nav>
+                <ul>
+                    <li><a href="#info">Information</a></li>
+                    <li><a href="#" class="btn" id="loginBtn">Login</a></li>
+                    <li><a href="#" class="btn" id="registerBtn">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="info" class="section">
+        <div class="container">
+            <h2>About Flipped Classroom</h2>
+            <p>The flipped classroom is an instructional strategy where traditional teaching methods are reversed. Instead of introducing new content during class time, students first learn new material at home through videos, readings, or other resources. Class time is then used for engaging in activities that deepen understanding, such as discussions, problem-solving, or hands-on exercises.</p>
+            <h3>Key Features:</h3>
+            <ul>
+                <li><strong>Pre-Class Learning:</strong> Students review lecture material or complete readings at home. This can be done through recorded video lectures, online resources, or assigned readings. Students can learn at their own pace, pausing and replaying content as needed.</li>
+                <li><strong>In-Class Activities:</strong> Class time is dedicated to applying the material learned at home. This can include group work, projects, or interactive exercises. Emphasizes student engagement through discussions, problem-solving, and practical exercises.</li>
+                <li><strong>Feedback and Assessment:</strong> Teachers can provide immediate feedback and support during class activities. Often includes online assessments or quizzes to evaluate understanding and retention of the material.</li>
+            </ul>
+            <h3>Benefits:</h3>
+            <ul>
+                <li>Enhanced understanding through active engagement and application of knowledge.</li>
+                <li>Increased engagement and interaction during class activities.</li>
+                <li>Flexibility for students to learn at their own pace and revisit content as needed.</li>
+                <li>More teacher interaction and personalized support.</li>
+            </ul>
+            <h3>Challenges:</h3>
+            <ul>
+                <li>Requires access to technology and internet resources for all students.</li>
+                <li>Teachers need to invest time in creating or curating high-quality pre-class materials.</li>
+                <li>Students need to be disciplined and take responsibility for their pre-class learning.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="loginClose">&times;</span>
+            <h2>Login As</h2>
+            <ul>
+                <li><a href="C:\Users\DELL\OneDrive\Desktop\flipped_classroom\s_re & s_lo\T_login.html">Teacher</a></li>
+                <li><a href="C:\Users\DELL\OneDrive\Desktop\flipped_classroom\s_re & s_lo\S_login.html">Student</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="registerClose">&times;</span>
+            <h2>Register As</h2>
+            <ul>
+                <li><a href="C:\Users\DELL\OneDrive\Desktop\flipped_classroom\s_re & s_lo\teacher_registration.html">Teacher</a></li>
+                <li><a href="C:\Users\DELL\OneDrive\Desktop\flipped_classroom\s_re & s_lo\student_registration.html">Student</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Flipped Classroom. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get modal elements
+        var loginModal = document.getElementById("loginModal");
+        var registerModal = document.getElementById("registerModal");
+
+        // Get button elements
+        var loginBtn = document.getElementById("loginBtn");
+        var registerBtn = document.getElementById("registerBtn");
+
+        // Get close elements
+        var loginClose = document.getElementById("loginClose");
+        var registerClose = document.getElementById("registerClose");
+
+        // Open login modal
+        loginBtn.onclick = function() {
+            loginModal.style.display = "block";
+            loginModal.querySelector(".modal-content").style.animation = "slideIn 0.5s ease-out";
+        }
+
+        // Open register modal
+        registerBtn.onclick = function() {
+            registerModal.style.display = "block";
+            registerModal.querySelector(".modal-content").style.animation = "slideIn 0.5s ease-out";
+        }
+
+        // Close login modal
+        loginClose.onclick = function() {
+            loginModal.querySelector(".modal-content").style.animation = "slideOut 0.5s ease-in";
+            setTimeout(function() {
+                loginModal.style.display = "none";
+            }, 500); // Delay hiding the modal until the animation is complete
+        }
+
+        // Close register modal
+        registerClose.onclick = function() {
+            registerModal.querySelector(".modal-content").style.animation = "slideOut 0.5s ease-in";
+            setTimeout(function() {
+                registerModal.style.display = "none";
+            }, 500); // Delay hiding the modal until the animation is complete
+        }
+
+        // Close modals when clicking outside of them
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.querySelector(".modal-content").style.animation = "slideOut 0.5s ease-in";
+                setTimeout(function() {
+                    loginModal.style.display = "none";
+                }, 500); // Delay hiding the modal until the animation is complete
+            }
+            if (event.target == registerModal) {
+                registerModal.querySelector(".modal-content").style.animation = "slideOut 0.5s ease-in";
+                setTimeout(function() {
+                    registerModal.style.display = "none";
+                }, 500); // Delay hiding the modal until the animation is complete
+            }
+        }
+    </script>
+</body>
+</html>

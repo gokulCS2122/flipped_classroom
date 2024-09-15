@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures Course - Tests</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        header {
+            background-color: #002366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-left: 5px solid #FFA500;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        iframe {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        #analysis {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Data Structures Course: Lecture and Test</h1>
+</header>
+
+<main>
+    <!-- Button to view all videos -->
+    <button id="viewAllBtn">View All Above Videos</button>
+
+    <!-- Lecture 1 -->
+    <section id="lecture1">
+        <h2>Lecture 1: Introduction to Data and Data Types</h2>
+        <iframe id="video1" width="560" height="315" src="https://www.youtube.com/embed/UKEYTI1V0Vw?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+        <button class="startTestBtn" data-video-id="video1" data-form-id="test1" disabled>Start Test</button>
+        <form id="test1">
+            <label for="q1">1. What is data?</label>
+            <input type="text" id="q1" required placeholder="Your answer">
+            <button type="submit">Submit Test</button>
+        </form>
+        <div id="result1"></div>
+
+        <div class="nav-buttons">
+            <button id="back1" disabled>Back</button>
+            <button id="next1" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Lecture 2 -->
+    <section id="lecture2" style="display: none;">
+        <h2>Lecture 2: Introduction to Data Structures</h2>
+        <iframe id="video2" width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+
+        <button class="startTestBtn" data-video-id="video2" data-form-id="test2" disabled>Start Test</button>
+        <form id="test2">
+            <label for="q2">1. What are Data Structures?</label>
+            <input type="text" id="q2" required placeholder="Your answer">
+            <button type="submit">Submit Test</button>
+        </form>
+        <div id="result2"></div>
+
+        <div class="nav-buttons">
+            <button id="back2">Back</button>
+            <button id="next2" disabled>Next</button>
+        </div>
+    </section>
+
+    <!-- Add more lecture sections here -->
+
+    <!-- Video Analysis Section -->
+    <section id="analysis">
+        <h3>Video Watch Analysis:</h3>
+        <p>Total Video Watches: <span id="totalWatches">0</span></p>
+    </section>
+</main>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    let totalVideoWatches = 0;
+    const players = {};
+    const totalWatchesElement = document.getElementById('totalWatches');
+    const completedLectures = {};
+
+    // Load YouTube API and create players
+    function onYouTubeIframeAPIReady() {
+        // Initialize YouTube players for each video
+        players.video1 = new YT.Player('video1', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+        players.video2 = new YT.Player('video2', {
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // Event handler for video state changes
+    function onPlayerStateChange(event) {
+        const player = event.target;
+        const videoId = player.getIframe().id;
+
+        if (event.data === YT.PlayerState.ENDED) {
+            // Mark the video as watched
+            player.getIframe().setAttribute('watched', 'true');
+            totalVideoWatches++;
+            totalWatchesElement.textContent = totalVideoWatches;
+            document.querySelector(`button[data-video-id="${videoId}"]`).disabled = false;
+        }
+    }
+
+    // Show all videos when "View All Above Videos" is clicked
+    document.getElementById('viewAllBtn').addEventListener('click', function () {
+        document.querySelectorAll('section').forEach(section => {
+            section.style.display = 'block';
+        });
+    });
+
+    // Function to handle the "Start Test" button click
+    document.querySelectorAll('.startTestBtn').forEach(button => {
+        button.addEventListener('click', function () {
+            const videoId = this.getAttribute('data-video-id');
+            const formId = this.getAttribute('data-form-id');
+            const iframe = document.getElementById(videoId);
+
+            // Check if the video is watched before allowing the test
+            if (iframe.hasAttribute('watched')) {
+                document.getElementById(formId).style.display = 'block'; // Show the test form
+            } else {
+                alert('Please watch the video before starting the test.');
+            }
+        });
+    });
+
+    // Handle form submissions (test submissions)
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const resultId = this.id.replace('test', 'result');
+            document.getElementById(resultId).textContent = 'Test submitted successfully!';
+
+            const lectureId = this.id.replace('test', 'lecture');
+            completedLectures[lectureId] = true;
+
+            // Enable the Next button for the current lecture
+            document.getElementById(`next${lectureId.replace('lecture', '')}`).disabled = false;
+        });
+    });
+
+    // Navigation buttons for Lecture 1
+    document.getElementById('next1').addEventListener('click', function () {
+        if (completedLectures['lecture1']) {
+            document.getElementById('lecture1').style.display = 'none';
+            document.getElementById('lecture2').style.display = 'block';
+        }
+    });
+
+    document.getElementById('back1').addEventListener('click', function () {
+        // Lecture 1 is the first lecture, so no back action here.
+    });
+
+    // Navigation buttons for Lecture 2
+    document.getElementById('next2').addEventListener('click', function () {
+        if (completedLectures['lecture2']) {
+            alert('Lecture 2 is completed. Add more lectures or actions.');
+        }
+    });
+
+    document.getElementById('back2').addEventListener('click', function () {
+        document.getElementById('lecture2').style.display = 'none';
+        document.getElementById('lecture1').style.display = 'block';
+    });
+
+</script>
+
+</body>
+</html>

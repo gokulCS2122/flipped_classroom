@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Student Registration</h2>
+        <form id="student-registration-form">
+            <label for="college-prn">College PRN:</label>
+            <input type="text" id="college-prn" name="college-prn" required>
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" name="first-name" required>
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" name="last-name" required>
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="button" onclick="nextScreen()">NEXT</button>
+        </form>
+        <div id="additional-info" style="display:none;">
+            <h3>Select Branch, Semester, and Course</h3>
+            <label for="branch">Branch:</label>
+            <select id="branch" name="branch" required onchange="updateCourses()">
+                <option value="">Select a branch</option>
+                <option value="cse">Computer Science and Engineering</option>
+                <option value="ece">Electronics and Telecommunication</option>
+                <option value="aiml">AI & ML</option>
+                <option value="mech">Mechanical</option>
+                <option value="civil">Civil Engineering</option>
+            </select>
+            <label for="semester">Semester:</label>
+            <select id="semester" name="semester" required onchange="updateCourses()">
+                <option value="">Select a semester</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+            </select>
+            <label for="course">Course:</label>
+            <select id="course" name="course" required>
+                <option value="">Select a course</option>
+            </select>
+            <button type="button" onclick="registerStudent()">REGISTER</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
