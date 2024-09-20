@@ -116,10 +116,8 @@
 </header>
 
 <main>
-    <!-- Button to view all videos -->
     <button id="viewAllBtn">View All Above Videos</button>
 
-    <!-- Lecture 1 -->
     <section id="lecture1">
         <h2>Lecture 1: Introduction to Data and Data Types</h2>
         <iframe id="video1" width="560" height="315" src="https://www.youtube.com/embed/UKEYTI1V0Vw?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
@@ -138,10 +136,9 @@
         </div>
     </section>
 
-    <!-- Lecture 2 -->
     <section id="lecture2" style="display: none;">
         <h2>Lecture 2: Introduction to Data Structures</h2>
-        <iframe id="video2" width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+        <iframe id="video2" width="560" height="315" src="https://www.youtube.com/embed/-D5u5HJbISc?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
 
         <button class="startTestBtn" data-video-id="video2" data-form-id="test2" disabled>Start Test</button>
         <form id="test2">
@@ -157,9 +154,6 @@
         </div>
     </section>
 
-    <!-- Add more lecture sections here -->
-
-    <!-- Video Analysis Section -->
     <section id="analysis">
         <h3>Video Watch Analysis:</h3>
         <p>Total Video Watches: <span id="totalWatches">0</span></p>
@@ -173,9 +167,7 @@
     const totalWatchesElement = document.getElementById('totalWatches');
     const completedLectures = {};
 
-    // Load YouTube API and create players
     function onYouTubeIframeAPIReady() {
-        // Initialize YouTube players for each video
         players.video1 = new YT.Player('video1', {
             events: {
                 'onStateChange': onPlayerStateChange
@@ -188,13 +180,11 @@
         });
     }
 
-    // Event handler for video state changes
     function onPlayerStateChange(event) {
         const player = event.target;
         const videoId = player.getIframe().id;
 
         if (event.data === YT.PlayerState.ENDED) {
-            // Mark the video as watched
             player.getIframe().setAttribute('watched', 'true');
             totalVideoWatches++;
             totalWatchesElement.textContent = totalVideoWatches;
@@ -202,30 +192,26 @@
         }
     }
 
-    // Show all videos when "View All Above Videos" is clicked
     document.getElementById('viewAllBtn').addEventListener('click', function () {
         document.querySelectorAll('section').forEach(section => {
             section.style.display = 'block';
         });
     });
 
-    // Function to handle the "Start Test" button click
     document.querySelectorAll('.startTestBtn').forEach(button => {
         button.addEventListener('click', function () {
             const videoId = this.getAttribute('data-video-id');
             const formId = this.getAttribute('data-form-id');
             const iframe = document.getElementById(videoId);
 
-            // Check if the video is watched before allowing the test
             if (iframe.hasAttribute('watched')) {
-                document.getElementById(formId).style.display = 'block'; // Show the test form
+                document.getElementById(formId).style.display = 'block';
             } else {
                 alert('Please watch the video before starting the test.');
             }
         });
     });
 
-    // Handle form submissions (test submissions)
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -235,12 +221,10 @@
             const lectureId = this.id.replace('test', 'lecture');
             completedLectures[lectureId] = true;
 
-            // Enable the Next button for the current lecture
             document.getElementById(`next${lectureId.replace('lecture', '')}`).disabled = false;
         });
     });
 
-    // Navigation buttons for Lecture 1
     document.getElementById('next1').addEventListener('click', function () {
         if (completedLectures['lecture1']) {
             document.getElementById('lecture1').style.display = 'none';
@@ -249,10 +233,9 @@
     });
 
     document.getElementById('back1').addEventListener('click', function () {
-        // Lecture 1 is the first lecture, so no back action here.
+        // No back action for the first lecture
     });
 
-    // Navigation buttons for Lecture 2
     document.getElementById('next2').addEventListener('click', function () {
         if (completedLectures['lecture2']) {
             alert('Lecture 2 is completed. Add more lectures or actions.');
